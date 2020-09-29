@@ -146,14 +146,14 @@ public class Loan
 
 
     // Extending issued Date 
-    public void renewIssuedBook(Date iDate)
+    /*public void renewIssuedBook(Date iDate)
     {        
         issuedDate = iDate;
         
         System.out.println("\nThe deadline of the book " + getBook().getTitle() + " has been extended.");
         System.out.println("Issued Book is successfully renewed!\n");
     }
-
+*/
 
 
 
