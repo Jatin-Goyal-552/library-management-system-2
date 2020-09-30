@@ -4,14 +4,17 @@ package LMS;
 import java.io.*;
 import java.util.*;
 
-public class Borrower extends Person 
+public class student extends Person 
 {    
-    private ArrayList<Loan> borrowedBooks;          //Those books which are currently borrowed by this borrower
-    private ArrayList<HoldRequest> onHoldBooks;    //Those books which are currently requested by this borrower to be on hold
+    private ArrayList<Loan> borrowedBooks;          //Those books which are currently borrowed by this student
+
+    private ArrayList<HoldRequest> onHoldBooks;    //Those books which are currently requested by this student
+ to be on hold
 
     
     
-    public Borrower(int id,String n, String a, int p) // para. cons
+    public student
+(int id,String n, String a, int p) // para. cons
     {
         super(id,n,a,p);
         
