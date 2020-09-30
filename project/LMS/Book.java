@@ -10,7 +10,7 @@ public class Book {
     private int bookID;           // ID given by a library to a book to make it distinguishable from other books
     private String title;         // Title of a book      // Subject to which a book is related!
     private String author;        // Author of book!
-    private boolean isIssued;        // this will be true if the book is currently issued to some borrower.
+    private boolean isIssued;        // this will be true if the book is currently issued to some student.
     private ArrayList<HoldRequest> holdRequests; // record of all hold request on that book
  
     static int currentIdNumber = 0;     //This will be unique for every book, since it will be incremented when everytime
@@ -58,7 +58,7 @@ public class Book {
             System.out.println("\nHold Requests are: ");
             
             System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");            
-            System.out.println("No.\t\tBook's Title\t\t\tBorrower's Name\t\t\tRequest Date");
+            System.out.println("No.\t\tBook's Title\t\t\tstudent's Name\t\t\tRequest Date");
             System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
             
             for (int i = 0; i < holdRequests.size(); i++)
@@ -124,28 +124,28 @@ public class Book {
     //-------------------------------------------------------------------//
     
     // Placing book on Hold
-    public void placeBookOnHold(Borrower bor)
+    public void placeBookOnHold(student bor)
     {
         HoldRequest hr = new HoldRequest(bor,this, new Date());
         
         addHoldRequest(hr);        //Add this hold request to holdRequests queue of this book
-        bor.addHoldRequest(hr);      //Add this hold request to that particular borrower's class as well
+        bor.addHoldRequest(hr);      //Add this hold request to that particular student's class as well
         
-        System.out.println("\nThe book " + title + " has been successfully placed on hold by borrower " + bor.getName() + ".\n");
+        System.out.println("\nThe book " + title + " has been successfully placed on hold by student " + bor.getName() + ".\n");
     }
     
     
 
 
    // Request for Holding a Book
-    public void makeHoldRequest(Borrower borrower)
+    public void makeHoldRequest(student student)
     {
         boolean makeRequest = true;
 
-        //If that borrower has already borrowed that particular book. Then he isn't allowed to make request for that book. He will have to renew the issued book in order to extend the return deadline.
-        for(int i=0;i<borrower.getBorrowedBooks().size();i++)
+        //If that student has already borrowed that particular book. Then he isn't allowed to make request for that book. He will have to renew the issued book in order to extend the return deadline.
+        for(int i=0;i<student.getBorrowedBooks().size();i++)
         {
-            if(borrower.getBorrowedBooks().get(i).getBook()==this)
+            if(student.getBorrowedBooks().get(i).getBook()==this)
             {
                 System.out.println("\n" + "You have already borrowed " + title);
                 return;                
@@ -153,10 +153,10 @@ public class Book {
         }
         
         
-        //If that borrower has already requested for that particular book. Then he isn't allowed to make the same request again.
+        //If that student has already requested for that particular book. Then he isn't allowed to make the same request again.
         for (int i = 0; i < holdRequests.size(); i++)
         {
-            if ((holdRequests.get(i).getBorrower() == borrower))
+            if ((holdRequests.get(i).getstudent() == student))
             {
                 makeRequest = false;    
                 break;
@@ -165,7 +165,7 @@ public class Book {
 
         if (makeRequest)
         {
-            placeBookOnHold(borrower);
+            placeBookOnHold(student);
         }
         else
             System.out.println("\nYou already have one hold request for this book.\n");
@@ -176,13 +176,13 @@ public class Book {
     public void serviceHoldRequest(HoldRequest hr)
     {
         removeHoldRequest();
-        hr.getBorrower().removeHoldRequest(hr);
+        hr.getstudent().removeHoldRequest(hr);
     }
 
     
         
     // Issuing a Book
-    public void issueBook(Borrower borrower, Staff staff)
+    public void issueBook(student student, Staff staff)
     {        
         //First deleting the expired hold requests
         Date today = new Date();        
@@ -200,7 +200,7 @@ public class Book {
             if(days>Library.getInstance().getHoldRequestExpiry())
             {
                 removeHoldRequest();
-                hr.getBorrower().removeHoldRequest(hr);
+                hr.getstudent().removeHoldRequest(hr);
             } 
         }
                
@@ -214,7 +214,7 @@ public class Book {
             
             if (choice.equals("y"))
             {                
-                makeHoldRequest(borrower);
+                makeHoldRequest(student);
             }
         }
         
@@ -226,15 +226,15 @@ public class Book {
                 
                 for (int i = 0; i < holdRequests.size() && !hasRequest;i++)
                 {
-                    if (holdRequests.get(i).getBorrower() == borrower)
+                    if (holdRequests.get(i).getstudent() == student)
                         hasRequest = true;
                         
                 }
                 
                 if (hasRequest)
                 {
-                    //If this particular borrower has the earliest request for this book
-                    if (holdRequests.get(0).getBorrower() == borrower)
+                    //If this particular student has the earliest request for this book
+                    if (holdRequests.get(0).getstudent() == student)
                         serviceHoldRequest(holdRequests.get(0));       
 
                     else
@@ -254,7 +254,7 @@ public class Book {
                     
                     if (choice.equals("y"))
                     {
-                        makeHoldRequest(borrower); 
+                        makeHoldRequest(student); 
                     }                    
                     
                     return;
@@ -264,27 +264,27 @@ public class Book {
             //If there are no hold requests for this book, then simply issue the book.            
             setIssuedStatus(true);
             
-            Loan iHistory = new Loan(borrower,this,staff,null,new Date(),null,false);
+            Loan iHistory = new Loan(student,this,staff,null,new Date(),null,false);
             
             Library.getInstance().addLoan(iHistory);
-            borrower.addBorrowedBook(iHistory);
+            student.addBorrowedBook(iHistory);
                                     
-            System.out.println("\nThe book " + title + " is successfully issued to " + borrower.getName() + ".");
+            System.out.println("\nThe book " + title + " is successfully issued to " + student.getName() + ".");
             System.out.println("\nIssued by: " + staff.getName());            
         }
     }
         
         
     // Returning a Book
-    public void returnBook(Borrower borrower, Loan l, Staff staff)
+    public void returnBook(student student, Loan l, Staff staff)
     {
         l.getBook().setIssuedStatus(false);        
         l.setReturnedDate(new Date());
         l.setReceiver(staff);        
         
-        borrower.removeBorrowedBook(l);
+        student.removeBorrowedBook(l);
         
-        System.out.println("\nThe book " + l.getBook().getTitle() + " is successfully returned by " + borrower.getName() + ".");
+        System.out.println("\nThe book " + l.getBook().getTitle() + " is successfully returned by " + student.getName() + ".");
         System.out.println("\nReceived by: " + staff.getName());            
     }
     
