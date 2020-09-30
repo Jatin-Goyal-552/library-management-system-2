@@ -124,7 +124,7 @@ public class Book {
     //-------------------------------------------------------------------//
     
     // Placing book on Hold
-    public void placeBookOnHold(Borrower bor)
+    public void placeBookOnHold(student bor)
     {
         HoldRequest hr = new HoldRequest(bor,this, new Date());
         
