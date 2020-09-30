@@ -18,11 +18,5 @@ public class Librarian extends Staff {
         currentOfficeNumber++;
     }
     
-    // Printing Librarian's Info
-    @Override
-    public void printInfo()
-    {
-        super.printInfo();
-        System.out.println("Office Number: " + officeNo);
-    }   
+  
 }

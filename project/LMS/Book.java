@@ -78,45 +78,7 @@ public class Book {
         System.out.println(title + "\t\t\t" + author + "\t\t\t" + subject);
     }
     
-    // changign Info of a Book
-    public void changeBookInfo() throws IOException
-    {
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        System.out.println("\nUpdate Author? (y/n)");
-        input = scanner.next();
-        
-        if(input.equals("y"))
-        {
-            System.out.println("\nEnter new Author: ");
-            author = reader.readLine();
-        }
-
-        System.out.println("\nUpdate Subject? (y/n)");
-        input = scanner.next();
-        
-        if(input.equals("y"))
-        {
-            System.out.println("\nEnter new Subject: ");
-            subject = reader.readLine();
-        }
-
-        System.out.println("\nUpdate Title? (y/n)");
-        input = scanner.next();
-        
-        if(input.equals("y"))
-        {
-            System.out.println("\nEnter new Title: ");
-            title = reader.readLine();
-        }        
-        
-        System.out.println("\nBook is successfully updated.");
-        
-    }
-    
+   
     /*------------Getter FUNCs.---------*/
     
     public String getTitle()

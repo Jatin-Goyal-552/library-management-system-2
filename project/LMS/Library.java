@@ -127,11 +127,7 @@ public class Library {
         return false;
     }
     
-    public void addClerk(Clerk c) 
-    {
-        persons.add(c);
-    }
-
+    
     public void addBorrower(Borrower b)
     {
         persons.add(b);
@@ -172,31 +168,6 @@ public class Library {
         return null;
     }
     
-    public Clerk findClerk()
-    {
-        System.out.println("\nEnter Clerk's ID: ");
-        
-        int id = 0;
-        
-        Scanner scanner = new Scanner(System.in);
-        
-        try{
-            id = scanner.nextInt();
-        }
-        catch (java.util.InputMismatchException e)
-        {
-            System.out.println("\nInvalid Input");
-        }
-
-        for (int i = 0; i < persons.size(); i++)
-        {
-            if (persons.get(i).getID() == id && persons.get(i).getClass().getSimpleName().equals("Clerk"))
-                return (Clerk)(persons.get(i));
-        }
-        
-        System.out.println("\nSorry this ID didn't match any Clerk's ID.");
-        return null;
-    }
     
     /*------- FUNCS. on Books In Library--------------*/
     public void addBookinLibrary(Book b)
@@ -204,86 +175,7 @@ public class Library {
         booksInLibrary.add(b);
     }
     
-    //When this function is called, only the pointer of the book placed in booksInLibrary is removed. But the real object of book
-    //is still there in memory because pointers of that book placed in IssuedBooks and ReturnedBooks are still pointing to that book. And we
-    //are maintaining those pointers so that we can maintain history.
-    //But if we donot want to maintain history then we can delete those pointers placed in IssuedBooks and ReturnedBooks as well which are
-    //pointing to that book. In this way the book will be really removed from memory.
-    public void removeBookfromLibrary(Book b)  
-    {
-        boolean delete = true;
-        
-        //Checking if this book is currently borrowed by some borrower
-        for (int i = 0; i < persons.size() && delete; i++)
-        {
-            if (persons.get(i).getClass().getSimpleName().equals("Borrower"))
-            {
-                ArrayList<Loan> borBooks = ((Borrower)(persons.get(i))).getBorrowedBooks();
-                
-                for (int j = 0; j < borBooks.size() && delete; j++)
-                {
-                    if (borBooks.get(j).getBook() == b)
-                    {
-                        delete = false;
-                        System.out.println("This particular book is currently borrowed by some borrower.");
-                    }
-                }              
-            }
-        }
-        
-        if (delete)
-        {
-            System.out.println("\nCurrently this book is not borrowed by anyone.");
-            ArrayList<HoldRequest> hRequests = b.getHoldRequests();
-            
-            if(!hRequests.isEmpty())
-            {
-                System.out.println("\nThis book might be on hold requests by some borrowers. Deleting this book will delete the relevant hold requests too.");
-                System.out.println("Do you still want to delete the book? (y/n)");
-                
-                Scanner sc = new Scanner(System.in);
-                
-                while (true)
-                {
-                    String choice = sc.next();
-                    
-                    if(choice.equals("y") || choice.equals("n"))
-                    {
-                        if(choice.equals("n"))
-                        {
-                            System.out.println("\nDelete Unsuccessful.");
-                            return;
-                        }                            
-                        else
-                        {
-                            //Empty the books hold request array
-                            //Delete the hold request from the borrowers too
-                            for (int i = 0; i < hRequests.size() && delete; i++)
-                            {
-                                HoldRequest hr = hRequests.get(i);
-                                hr.getBorrower().removeHoldRequest(hr);
-                                b.removeHoldRequest();                                                                
-                            }
-                        }
-                    }
-                    else
-                        System.out.println("Invalid Input. Enter (y/n): ");
-                }
-                
-            }
-            else
-                System.out.println("This book has no hold requests.");
-                
-            booksInLibrary.remove(b);
-            System.out.println("The book is successfully removed.");
-        }
-        else
-            System.out.println("\nDelete Unsuccessful.");
-    }
-    
-    
-    
-    // Searching Books on basis of title, Subject or Author 
+   
     public ArrayList<Book> searchForBooks() throws IOException
     {
         String choice;
@@ -453,30 +345,10 @@ public class Library {
             System.out.println("\nInvalid Input.");
         }
             
-        //If clerk is to be created
-        if (x == 'c')
-        {
-            double salary = 0;
-            
-            try{
-                System.out.println("Enter Salary: ");
-                salary = sc.nextDouble();
-            }
-            catch (java.util.InputMismatchException e)
-            {
-                System.out.println("\nInvalid Input.");
-            }
-            
-            Clerk c = new Clerk(-1,n,address,phone,salary,-1);            
-            addClerk(c);
-            
-            System.out.println("\nClerk with name " + n + " created successfully.");
-            System.out.println("\nYour ID is : " + c.getID());
-            System.out.println("Your Password is : " + c.getPassword());
-        }
         
+       
         //If librarian is to be created
-        else if (x == 'l')
+        if (x == 'l')
         {
             double salary = 0;            
             try{
@@ -485,6 +357,7 @@ public class Library {
             }
             catch (java.util.InputMismatchException e)
             {
+                System.out.println(e);
                 System.out.println("\nInvalid Input.");
             }
             
@@ -567,34 +440,7 @@ public class Library {
     
     
     // History when a Book was Issued and was Returned!
-    public void viewHistory()
-    {
-        if (!loans.isEmpty())
-        { 
-            System.out.println("\nIssued Books are: ");
-            
-            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");            
-            System.out.println("No.\tBook's Title\tBorrower's Name\t  Issuer's Name\t\tIssued Date\t\t\tReceiver's Name\t\tReturned Date\t\tFine Paid");
-            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-            
-            for (int i = 0; i < loans.size(); i++)
-            {    
-                if(loans.get(i).getIssuer()!=null)
-                    System.out.print(i + "-" + "\t" + loans.get(i).getBook().getTitle() + "\t\t\t" + loans.get(i).getBorrower().getName() + "\t\t" + loans.get(i).getIssuer().getName() + "\t    " + loans.get(i).getIssuedDate());
-                
-                if (loans.get(i).getReceiver() != null)
-                {
-                    System.out.print("\t" + loans.get(i).getReceiver().getName() + "\t\t" + loans.get(i).getReturnDate() +"\t   " + loans.get(i).getFineStatus() + "\n");
-                }
-                else
-                    System.out.print("\t\t" + "--" + "\t\t\t" + "--" + "\t\t" + "--" + "\n");
-            }
-        }
-        else
-            System.out.println("\nNo issued books.");                        
-    }
-    
-    
+   
     
     
     
@@ -614,7 +460,7 @@ public class Library {
             String uName = "LIBRARY";
             String uPass= "123";
             Connection con = DriverManager.getConnection( host, uName, uPass );
-            return con;
+           return con;
         }
         catch ( SQLException err ) 
         {

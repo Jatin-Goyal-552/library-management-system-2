@@ -20,17 +20,7 @@ public class Borrower extends Person
     }
 
     
-    // Printing Borrower's Info
-    @Override
-    public void printInfo()
-    {
-        super.printInfo();
-               
-        printBorrowedBooks();
-        printOnHoldBooks();
-    }
    
-    // Printing Book's Info Borrowed by Borrower
     public void printBorrowedBooks()
     {
         if (!borrowedBooks.isEmpty())
@@ -74,49 +64,7 @@ public class Borrower extends Person
             System.out.println("\nNo On Hold books.");                
     }
    
-    // Updating Borrower's Info
-    public void updateBorrowerInfo() throws IOException
-    {
-        String choice;
-        
-        Scanner sc = new Scanner(System.in);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        
-        System.out.println("\nDo you want to update " + getName() + "'s Name ? (y/n)");  
-        choice = sc.next();  
-
-        if(choice.equals("y"))
-        {
-            System.out.println("\nType New Name: ");
-            setName(reader.readLine());
-            System.out.println("\nThe name is successfully updated.");            
-        }    
-
-               
-        System.out.println("\nDo you want to update " + getName() + "'s Address ? (y/n)");  
-        choice = sc.next();  
-
-        if(choice.equals("y"))
-        {
-            System.out.println("\nType New Address: ");
-            setAddress(reader.readLine());
-            System.out.println("\nThe address is successfully updated.");            
-        }    
-
-        System.out.println("\nDo you want to update " + getName() + "'s Phone Number ? (y/n)");  
-        choice = sc.next();  
-
-        if(choice.equals("y"))
-        {
-            System.out.println("\nType New Phone Number: ");
-            setPhone(sc.nextInt());
-            System.out.println("\nThe phone number is successfully updated.");
-        }
-        
-        System.out.println("\nBorrower is successfully updated.");
-        
-    }
+   
     
     /*-- Adding and Removing from Borrowed Books---*/
     public void addBorrowedBook(Loan iBook)
