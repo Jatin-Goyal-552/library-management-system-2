@@ -1,17 +1,17 @@
 
 package LMS;
-
+import java.util.*;
+import java.lang.Math; 
 public abstract class Person 
 {   
-    protected int id;           // ID of every person related to library
-    protected String password;  // Password of every person related to library
-    protected String name;      // Name of every person related to library
-    protected String address;   // Address of every person related to library
-    protected int phoneNo;      // PhoneNo of every person related to library
+    protected int id;           
+    protected String password; 
+    protected String name; 
+    protected String room;
+    protected int phoneNo;     
     
-    static int currentIdNumber = 0;     //This will be unique for every person, since it will be incremented when everytime
-                                       //when a person is created
-
+    static int currentIdNumber = 0;     
+                                       
     public Person(int dd, String n, String a, int p)   // para cons.
     {
         currentIdNumber++;
@@ -23,27 +23,16 @@ public abstract class Person
         else
             id = dd;
         
-        password = Integer.toString(id);
+        password =Integer.toString(id);
         name = n;
-        address = a;
+        room=a;
         phoneNo = p;
     }        
     
-    // Printing Info of a Person
-    public void printInfo()
+   
+    public void setRoom(String a)
     {
-        System.out.println("-----------------------------------------");
-        System.out.println("\nThe details are: \n");
-        System.out.println("ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Address: " + address);
-        System.out.println("Phone No: " + phoneNo + "\n");
-    }
-    
-    /*---------Setter FUNCs.---------*/
-    public void setAddress(String a)
-    {
-        address = a;
+        room = a;
     }
     
     public void setPhone(int p)
@@ -68,9 +57,9 @@ public abstract class Person
         return password;
     }
     
-     public String getAddress()
+     public String getRoom()
     {
-        return address;
+        return room;
     }
      
      public int getPhoneNumber()

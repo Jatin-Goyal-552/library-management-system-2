@@ -8,8 +8,7 @@ import java.util.*;
 public class Book {
    
     private int bookID;           // ID given by a library to a book to make it distinguishable from other books
-    private String title;         // Title of a book 
-    private String subject;       // Subject to which a book is related!
+    private String title;         // Title of a book      // Subject to which a book is related!
     private String author;        // Author of book!
     private boolean isIssued;        // this will be true if the book is currently issued to some borrower.
     private ArrayList<HoldRequest> holdRequests; // record of all hold request on that book
@@ -18,7 +17,7 @@ public class Book {
                                         //when a book is created
     
   
-    public Book(int id,String t, String s, String a, boolean issued)    // Parameterise cons.
+    public Book(int id,String t, String a, boolean issued)    // Parameterise cons.
     {
         currentIdNumber++;
         if(id==-1)
@@ -29,7 +28,7 @@ public class Book {
             bookID=id;
         
         title = t;
-        subject = s;
+        
         author = a;
         isIssued = issued;
         
@@ -75,48 +74,10 @@ public class Book {
     // printing book's Info
     public void printInfo()
     {
-        System.out.println(title + "\t\t\t" + author + "\t\t\t" + subject);
+        System.out.println(title + "\t\t\t" + author + "\t\t\t" );
     }
     
-    // changign Info of a Book
-    public void changeBookInfo() throws IOException
-    {
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        System.out.println("\nUpdate Author? (y/n)");
-        input = scanner.next();
-        
-        if(input.equals("y"))
-        {
-            System.out.println("\nEnter new Author: ");
-            author = reader.readLine();
-        }
-
-        System.out.println("\nUpdate Subject? (y/n)");
-        input = scanner.next();
-        
-        if(input.equals("y"))
-        {
-            System.out.println("\nEnter new Subject: ");
-            subject = reader.readLine();
-        }
-
-        System.out.println("\nUpdate Title? (y/n)");
-        input = scanner.next();
-        
-        if(input.equals("y"))
-        {
-            System.out.println("\nEnter new Title: ");
-            title = reader.readLine();
-        }        
-        
-        System.out.println("\nBook is successfully updated.");
-        
-    }
-    
+   
     /*------------Getter FUNCs.---------*/
     
     public String getTitle()
@@ -124,11 +85,7 @@ public class Book {
         return title;
     }
 
-    public String getSubject()
-    {
-        return subject;
-    }
-
+    
     public String getAuthor()
     {
         return author;
@@ -326,8 +283,6 @@ public class Book {
         l.setReceiver(staff);        
         
         borrower.removeBorrowedBook(l);
-        
-        l.payFine();
         
         System.out.println("\nThe book " + l.getBook().getTitle() + " is successfully returned by " + borrower.getName() + ".");
         System.out.println("\nReceived by: " + staff.getName());            
