@@ -89,23 +89,7 @@ public class Main
                 person.printInfo();
         }
         
-        //Compute Fine of a Borrower
-        else if (choice == 4)
-        {
-            if("Clerk".equals(person.getClass().getSimpleName()) || "Librarian".equals(person.getClass().getSimpleName()))
-            {
-                Borrower bor = lib.findBorrower();
-                
-                if(bor!=null)
-                {
-                    double totalFine = lib.computeFine2(bor);
-                    System.out.println("\nYour Total Fine is : Rs " + totalFine );                     
-                }
-            }
-            else
-            {
-                double totalFine = lib.computeFine2((Borrower)person);
-                System.out.println("\nYour Total Fine is : Rs " + totalFine );                 
+      ine is : Rs " + totalFine );                 
             }
         }
         
