@@ -75,51 +75,11 @@ public class Main
             }
         }
         
-        //View borrower's personal information
-        else if (choice == 3)
-        {
-            if("Clerk".equals(person.getClass().getSimpleName()) || "Librarian".equals(person.getClass().getSimpleName()))
-            {
-                Borrower bor = lib.findBorrower();
-                
-                if(bor!=null)
-                    bor.printInfo();
-            }
-            else
-                person.printInfo();
-        }
+       
         
-        //Compute Fine of a Borrower
-        else if (choice == 4)
-        {
-            if("Clerk".equals(person.getClass().getSimpleName()) || "Librarian".equals(person.getClass().getSimpleName()))
-            {
-                Borrower bor = lib.findBorrower();
-                
-                if(bor!=null)
-                {
-                    double totalFine = lib.computeFine2(bor);
-                    System.out.println("\nYour Total Fine is : Rs " + totalFine );                     
-                }
-            }
-            else
-            {
-                double totalFine = lib.computeFine2((Borrower)person);
-                System.out.println("\nYour Total Fine is : Rs " + totalFine );                 
-            }
-        }
+       
         
-        //Check hold request queue of a book
-        else if (choice == 5)
-        {
-            ArrayList<Book> books = lib.searchForBooks();
-            
-            if (books != null)
-            {
-                input = takeInput(-1,books.size());
-                books.get(input).printHoldRequests();
-            }
-        }
+      
                        
         //Issue a Book
         else if (choice == 6)
@@ -279,21 +239,21 @@ public class Main
         // Making connection with Database.
         Connection con = lib.makeConnection();
         
-        if (con == null)    // Oops can't connnect !
+      /*  if (con == null)    // Oops can't connnect !
         {
-          System.out.println("\nError connecting to Database. Exiting.");
-           return;
-       }
+            System.out.println("\nError connecting to Database. Exiting.");
+            return;
+        }*/
         
         try {
 
-       lib.populateLibrary(con);   // Populating Library with all Records
+       // lib.populateLibrary(con);   // Populating Library with all Records
          
         boolean stop = false;
         while(!stop)
         {   
             clrscr();
-        
+
             // FRONT END //
             System.out.println("--------------------------------------------------------");
             System.out.println("\tWelcome to Library Management System");
@@ -376,15 +336,15 @@ public class Main
                         System.out.println("Following Functionalities are available: \n");
                         System.out.println("1- Search a Book");
                         System.out.println("2- Place a Book on hold");
-                        System.out.println("3- Check Personal Info of Borrower");
-                        System.out.println("4- Check Total Fine of Borrower"); 
-                        System.out.println("5- Check Hold Requests Queue of a Book");                         
-                        System.out.println("6- Logout");
+                        
+                       
+                                               
+                        System.out.println("3- Logout");
                         System.out.println("--------------------------------------------------------");
                         
                         choice = takeInput(0,7);
 
-                        if (choice == 6)
+                        if (choice == 3)
                             break;
                         
                         allFunctionalities(person,choice);
@@ -474,7 +434,6 @@ public class Main
         }
         catch(Exception e)
         {
-            System.out.println(e);
             System.out.println("\nExiting...\n");
         }   // System Closed!
        
