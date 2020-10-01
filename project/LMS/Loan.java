@@ -17,53 +17,41 @@ public class Loan
     private Staff receiver;
     
     
-    public Loan(Borrower bor, Book b, Staff i, Staff r, Date iDate, Date rDate, boolean fPaid)  // Para cons.
-    {
-        borrower = bor;
-        book = b;
-        issuer = i;
-        receiver = r;
-        issuedDate = iDate;
-        dateReturned = rDate;
-    }
+   
     
-    /*----- Getter FUNCs.------------*/
     
-    public Book getBook()       //Returns the book
+    public Book getBook()       
     {
         return book;
     }
     
-    public Staff getIssuer()     //Returns the Staff Member who issued the book
+    public Staff getIssuer()   
     {
         return issuer;
     }
     
-    public Staff getReceiver()  //Returns the Staff Member to whom book is returned
+    public Staff getReceiver()  
     {
         return receiver;
     }
     
-    public Date getIssuedDate()     //Returns the date on which this particular book was issued
+    public Date getIssuedDate()     
     {
         return issuedDate;
     } 
 
-    public Date getReturnDate()     //Returns the date on which this particular book was returned
+    public Date getReturnDate()    
     {
         return dateReturned;
     }
     
-    public Borrower getBorrower()   //Returns the Borrower to whom the book was issued
+    public Borrower getBorrower()  
     {
         return borrower;
     }
     
    
-    /*---------------------------------------------*/
     
-    
-    /*----------Setter FUNCs.---------------------*/
     public void setReturnedDate(Date dReturned)
     {
         dateReturned = dReturned;
@@ -75,12 +63,6 @@ public class Loan
     {
         receiver = r;
     }
-    /*-------------------------------------------*/
     
-
-
-
-    //Computes fine for a particular loan only
-   
     
-}   // Loan class Closed
+}   

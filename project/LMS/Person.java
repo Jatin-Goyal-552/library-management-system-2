@@ -12,7 +12,7 @@ public abstract class Person
     
     static int currentIdNumber = 0;     
                                        
-    public Person(int dd, String n, String a, int p)   // para cons.
+    public Person(int dd, String n, String a, int p)   
     {
         currentIdNumber++;
         
@@ -44,9 +44,7 @@ public abstract class Person
     {
         name = n;
     }
-    /*----------------------------*/
     
-    /*-------Getter FUNCs.--------*/
     public String getName()
     {
         return name;
@@ -77,4 +75,4 @@ public abstract class Person
         currentIdNumber=n;
     }
    
-} // Person Class Closed
+} 
