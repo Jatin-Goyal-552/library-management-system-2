@@ -8,14 +8,14 @@ public class HoldRequest {
     Book book;
     Date requestDate;
     
-    public HoldRequest(Borrower bor, Book b, Date reqDate)  // para cons.
+    public HoldRequest(Borrower bor, Book b, Date reqDate)  
     {
         borrower = bor;
         book = b;
         requestDate = reqDate;
     }
     
-    /*----- Getter FUNCs.--------*/
+   
     public Borrower getBorrower()
     {
         return borrower;
@@ -30,11 +30,9 @@ public class HoldRequest {
     {
         return requestDate;
     }
-    /*--------------------------*/
     
-    // Print Hold Request Info 
     public void print()
     {
         System.out.print(book.getTitle() + "\t\t\t\t" + borrower.getName() + "\t\t\t\t"  + requestDate + "\n");
     }
-}// HoldRequest Class Closed
+}

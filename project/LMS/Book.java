@@ -7,17 +7,16 @@ import java.util.*;
 
 public class Book {
    
-    private int bookID;           // ID given by a library to a book to make it distinguishable from other books
-    private String title;         // Title of a book      // Subject to which a book is related!
-    private String author;        // Author of book!
-    private boolean isIssued;        // this will be true if the book is currently issued to some borrower.
-    private ArrayList<HoldRequest> holdRequests; // record of all hold request on that book
+    private int bookID;          
+    private String title;        
+    private String author;        
+    private boolean isIssued;       
+    private ArrayList<HoldRequest> holdRequests; 
  
-    static int currentIdNumber = 0;     //This will be unique for every book, since it will be incremented when everytime
-                                        //when a book is created
+    static int currentIdNumber = 0;    
     
   
-    public Book(int id,String t, String a, boolean issued)    // Parameterise cons.
+    public Book(int id,String t, String a, boolean issued)    
     {
         currentIdNumber++;
         if(id==-1)
@@ -35,13 +34,13 @@ public class Book {
         holdRequests = new ArrayList();
     }
     
-    // adding a hold req.
+    
     public void addHoldRequest(HoldRequest hr)
     {
         holdRequests.add(hr);
     }
     
-    // removing a hold req.
+    
     public void removeHoldRequest()
     {
         if(!holdRequests.isEmpty())
@@ -50,7 +49,7 @@ public class Book {
         }
     }
     
-    // printing all hold req on a book.
+    
     public void printHoldRequests()
     {
         if (!holdRequests.isEmpty())
@@ -71,14 +70,14 @@ public class Book {
             System.out.println("\nNo Hold Requests.");                                
     }
     
-    // printing book's Info
+   
     public void printInfo()
     {
         System.out.println(title + "\t\t\t" + author + "\t\t\t" );
     }
     
    
-    /*------------Getter FUNCs.---------*/
+    
     
     public String getTitle()
     {
@@ -110,9 +109,7 @@ public class Book {
     {
         return holdRequests;
     }
-    /*-----------------------------------*/
-     
-    // Setter Static Func.
+    
     public static void setIDCount(int n)
     {
         currentIdNumber = n;
@@ -121,9 +118,7 @@ public class Book {
 
     
     
-    //-------------------------------------------------------------------//
-    
-    // Placing book on Hold
+ 
     public void placeBookOnHold(Borrower bor)
     {
         HoldRequest hr = new HoldRequest(bor,this, new Date());
@@ -137,12 +132,12 @@ public class Book {
     
 
 
-   // Request for Holding a Book
+   
     public void makeHoldRequest(Borrower borrower)
     {
         boolean makeRequest = true;
 
-        //If that borrower has already borrowed that particular book. Then he isn't allowed to make request for that book. He will have to renew the issued book in order to extend the return deadline.
+       
         for(int i=0;i<borrower.getBorrowedBooks().size();i++)
         {
             if(borrower.getBorrowedBooks().get(i).getBook()==this)
@@ -153,7 +148,7 @@ public class Book {
         }
         
         
-        //If that borrower has already requested for that particular book. Then he isn't allowed to make the same request again.
+       
         for (int i = 0; i < holdRequests.size(); i++)
         {
             if ((holdRequests.get(i).getBorrower() == borrower))
@@ -172,7 +167,7 @@ public class Book {
     }
 
     
-    // Gertting Info of a Hold Request
+    
     public void serviceHoldRequest(HoldRequest hr)
     {
         removeHoldRequest();
@@ -181,10 +176,10 @@ public class Book {
 
     
         
-    // Issuing a Book
+    
     public void issueBook(Borrower borrower, Staff staff)
     {        
-        //First deleting the expired hold requests
+        
         Date today = new Date();        
         
         ArrayList<HoldRequest> hRequests = holdRequests;
@@ -193,7 +188,7 @@ public class Book {
         {
             HoldRequest hr = hRequests.get(i);            
             
-            //Remove that hold request which has expired
+           
             long days =  ChronoUnit.DAYS.between(today.toInstant(), hr.getRequestDate().toInstant());        
             days = 0-days;
             
@@ -261,21 +256,19 @@ public class Book {
                 }               
             }
                         
-            //If there are no hold requests for this book, then simply issue the book.            
+                        
             setIssuedStatus(true);
             
-            Loan iHistory = new Loan(borrower,this,staff,null,new Date(),null,false);
             
-            Library.getInstance().addLoan(iHistory);
-            borrower.addBorrowedBook(iHistory);
-                                    
+            
+           
             System.out.println("\nThe book " + title + " is successfully issued to " + borrower.getName() + ".");
             System.out.println("\nIssued by: " + staff.getName());            
         }
     }
         
         
-    // Returning a Book
+   
     public void returnBook(Borrower borrower, Loan l, Staff staff)
     {
         l.getBook().setIssuedStatus(false);        
@@ -288,4 +281,4 @@ public class Book {
         System.out.println("\nReceived by: " + staff.getName());            
     }
     
-}   // Book Class Closed
+}  

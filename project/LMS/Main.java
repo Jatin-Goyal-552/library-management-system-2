@@ -1,21 +1,21 @@
 
 package LMS;
 
-// Including Header Files.
+
 import java.io.*;
 import java.util.*;
-import java.sql.*;
+
 
 public class Main 
 {
-    // Clearing Required Area of Screen
+    
     public static void clrscr()
     {
         for (int i = 0; i < 20; i++)
             System.out.println();
     }
 
-    // Asking for Input as Choice
+   
     public static int takeInput(int min, int max)
     {    
         String choice;
@@ -38,7 +38,7 @@ public class Main
           
     }
 
-    // Functionalities of all Persons
+    
     public static void allFunctionalities(Person person, int choice) throws IOException
     {
         Library lib = Library.getInstance();
@@ -46,13 +46,13 @@ public class Main
         Scanner scanner = new Scanner(System.in);
         int input = 0;
         
-        //Search Book
+        
         if (choice == 1)
         {
             lib.searchForBooks();
         }
         
-        //Do Hold Request
+       
         else if (choice == 2)
         {
             ArrayList<Book> books = lib.searchForBooks();
@@ -78,7 +78,7 @@ public class Main
        
         
         
-        //Check hold request queue of a book
+        
         else if (choice == 3)
         {
             ArrayList<Book> books = lib.searchForBooks();
@@ -90,7 +90,7 @@ public class Main
             }
         }
                        
-        //Issue a Book
+        
         else if (choice == 4)
         {
             ArrayList<Book> books = lib.searchForBooks();
@@ -109,7 +109,7 @@ public class Main
             }
         }        
 
-        //Return a Book
+        
         else if (choice == 5)
         {
             Borrower bor = lib.findBorrower();
@@ -132,7 +132,7 @@ public class Main
         }        
 
         
-        //Add new Borrower
+       
         else if (choice == 6)
         {
             lib.createPerson('b');
@@ -162,49 +162,41 @@ public class Main
     
    
     
-    /*-------------------------------------MAIN---------------------------------------------------*/
+    
     
     public static void main(String[] args)
     {
         Scanner admin = new Scanner(System.in);
         
-        //-------------------INTERFACE---------------------------//
+        
         
         Library lib = Library.getInstance();
         
-        // Setting some by default information like name of library ,fine, deadline and limit of hold request
+        
         lib.setFine(20);
         lib.setRequestExpiry(7);
         lib.setReturnDeadline(5);
         lib.setName("FAST Library");
         
-        // Making connection with Database.
-        Connection con = lib.makeConnection();
-        
-       if (con == null)    // Oops can't connnect !
-        {
-          System.out.println("\nError connecting to Database. Exiting.");
-           return;
-       }
-        
+       
         try {
 
-       lib.populateLibrary(con);   // Populating Library with all Records
+         
          
         boolean stop = false;
         while(!stop)
         {   
             clrscr();
         
-            // FRONT END //
+            
             System.out.println("--------------------------------------------------------");
-            System.out.println("\tWelcome to Library Management System");
+            System.out.println("\tWelcome to IIITV Library Management System");
             System.out.println("--------------------------------------------------------");
             
             System.out.println("Following Functionalities are available: \n");
             System.out.println("1- Login");
             System.out.println("2- Exit");
-            System.out.println("3- Admininstrative Functions"); // Administration has access only 
+            System.out.println("3- Admininstrative Functions"); 
             
             System.out.println("-----------------------------------------\n");        
             
@@ -219,7 +211,7 @@ public class Main
                 
                 if(aPass.equals("lib"))
                 {
-                    while (true)    // Way to Admin Portal
+                    while (true)    
                     {
                         clrscr();
 
@@ -255,7 +247,7 @@ public class Main
                 
                 else if (person.getClass().getSimpleName().equals("Borrower"))
                 {                    
-                    while (true)    // Way to Borrower's Portal
+                    while (true)   
                     {
                         clrscr();
                                         
@@ -280,7 +272,7 @@ public class Main
                 
                 else if (person.getClass().getSimpleName().equals("Librarian"))
                 {
-                    while(true) // Way to Librarian Portal
+                    while(true) 
                     {
                         clrscr();
                                         
@@ -322,15 +314,14 @@ public class Main
             scanner.next();            
         }
         
-        //Loading back all the records in database
-        lib.fillItBack(con);
+   
         }
         catch(Exception e)
         {
             System.out.println("\nExiting...\n");
-        }   // System Closed!
+        }   
        
-    }    // Main Closed
+    }    
     
-}   // Class closed.
+}   
 

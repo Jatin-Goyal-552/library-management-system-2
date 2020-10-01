@@ -6,12 +6,12 @@ import java.util.*;
 
 public class Borrower extends Person 
 {    
-    private ArrayList<Loan> borrowedBooks;          //Those books which are currently borrowed by this borrower
-    private ArrayList<HoldRequest> onHoldBooks;    //Those books which are currently requested by this borrower to be on hold
+    private ArrayList<Loan> borrowedBooks;        
+    private ArrayList<HoldRequest> onHoldBooks;    
 
     
     
-    public Borrower(int id,String n, String a, int p) // para. cons
+    public Borrower(int id,String n, String a, int p)
     {
         super(id,n,a,p);
         
@@ -43,7 +43,7 @@ public class Borrower extends Person
     }
     
     
-    /*-- Adding and Removing from Borrowed Books---*/
+    
     public void addBorrowedBook(Loan iBook)
     {
         borrowedBooks.add(iBook);
@@ -54,9 +54,6 @@ public class Borrower extends Person
         borrowedBooks.remove(iBook);
     }    
     
-    /*-------------------------------------------*/
-    
-    /*-- Adding and Removing from On Hold Books---*/
     public void addHoldRequest(HoldRequest hr)
     {
         onHoldBooks.add(hr);
@@ -67,9 +64,7 @@ public class Borrower extends Person
         onHoldBooks.remove(hr);
     }
     
-    /*-------------------------------------------*/
     
-    /*-----------Getter FUNCs. ------------------*/
     public ArrayList<Loan> getBorrowedBooks()
     {
         return borrowedBooks;
@@ -79,5 +74,5 @@ public class Borrower extends Person
     {
         return onHoldBooks;
     }
-    /*-------------------------------------------*/
+    
 }
