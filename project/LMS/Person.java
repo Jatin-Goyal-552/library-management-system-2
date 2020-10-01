@@ -68,7 +68,7 @@ public abstract class Person
     {
         return id;
     }
-    /*---------------------------*/
+
     
      public static void setIDCount(int n)
     {

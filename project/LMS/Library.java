@@ -109,7 +109,7 @@ public class Library {
             return true;
         }
         else
-            System.out.println("\nSorry, the library already has one librarian. New Librarian can't be created.");
+            System.out.println("\nSorry,  Librarian already exists.");
         return false;
     }
     
@@ -148,7 +148,7 @@ public class Library {
                 return (Borrower)(persons.get(i));
         }
         
-        System.out.println("\nSorry this ID didn't match any Borrower's ID.");
+        System.out.println("\nSorry the borrower this ID doesn't exist in our database");
         return null;
     }
     
@@ -170,7 +170,8 @@ public class Library {
         
         while (true)
         {
-            System.out.println("\nEnter either '1' or '2'  for search by Title or Author of Book respectively: ");  
+            System.out.println("\nPress  1 to  search by Title of Book: ");
+            System.out.println("\nPress  2 to  search by Author of Book : ");
             choice = sc.next();
             
             if (choice.equals("1") || choice.equals("2") )
@@ -231,7 +232,7 @@ public class Library {
         }
         else
         {
-            System.out.println("\nSorry. No Books were found related to your query.");
+            System.out.println("\nSorry. No Books were found .");
             return null;
         }
     }
@@ -257,7 +258,7 @@ public class Library {
             }
         }
         else
-            System.out.println("\nCurrently, Library has no books.");                
+            System.out.println("\nCurrently, Library is empty!");
     }
 
      

@@ -23,7 +23,7 @@ public class Main
         
         while(true)
         {
-            System.out.println("\nEnter Choice: ");
+            System.out.println("\nPlease enter Choice: ");
 
             choice = input.next();
 
@@ -127,7 +127,7 @@ public class Main
                     l.getBook().returnBook(bor, l, (Staff)person);            
                 }
                 else
-                    System.out.println("\nThis borrower " + bor.getName() + " has no book to return.");
+                    System.out.println("\nThis borrower " + bor.getName() + " doesn't have  book to return.");
             }
         }        
 
@@ -143,17 +143,17 @@ public class Main
         {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.println("\nEnter Title:");
+            System.out.println("\nEnter Title of the book:");
             String title = reader.readLine();
 
-            System.out.println("\nEnter Author:");
+            System.out.println("\nEnter Author of the book:");
             String author = reader.readLine();
             
             lib.createBook(title, author);
         }        
         
        
-        System.out.println("\nPress any key to continue..\n");
+        System.out.println("\nPress any key to continue.......................\n");
         scanner.next();
     }
     
@@ -194,9 +194,9 @@ public class Main
             System.out.println("--------------------------------------------------------");
             
             System.out.println("Following Functionalities are available: \n");
-            System.out.println("1- Login");
-            System.out.println("2- Exit");
-            System.out.println("3- Admininstrative Functions"); 
+            System.out.println("Press 1 to Login");
+            System.out.println("Press 2 to Exit");
+            System.out.println("Press 3 to Admininstrative Functions");
             
             System.out.println("-----------------------------------------\n");        
             
@@ -206,23 +206,23 @@ public class Main
             
             if (choice == 3)
             {                   
-                System.out.println("\nEnter Password: ");
+                System.out.println("\nEnter your  Password: ");
                 String aPass = admin.next();
-                
+
                 if(aPass.equals("lib"))
                 {
                     while (true)    
                     {
                         clrscr();
 
-                        System.out.println("--------------------------------------------------------");
-                        System.out.println("\tWelcome to Admin's Portal");
+                        System.out.println("<<<<-------------------------------------------------------->>>>");
+                        System.out.println("\tWelcome to the Admin's Portal");
                         System.out.println("--------------------------------------------------------");
                         System.out.println("Following Functionalities are available: \n");
 
-                       System.out.println("1- Add Librarian");
-                        System.out.println("2- View All Books in Library");
-                        System.out.println("3- Logout");
+                        System.out.println("Press 1 to Add Librarian");
+                        System.out.println("Press 2 to View All Books in Library");
+                        System.out.println("Press 3 to Logout");
                         System.out.println("---------------------------------------------");
                         choice = takeInput(0,4);
                         if (choice == 3)
@@ -236,7 +236,7 @@ public class Main
                     }
                 }
                 else
-                    System.out.println("\nSorry! Wrong Password.");
+                    System.out.println("\nPassword doesn't match.");
             }
  
             else if (choice == 1)
@@ -255,9 +255,9 @@ public class Main
                         System.out.println("\tWelcome to Borrower's Portal");
                         System.out.println("--------------------------------------------------------");
                         System.out.println("Following Functionalities are available: \n");
-                        System.out.println("1- Search a Book");
-                        System.out.println("2- Place a Book on hold");                      
-                        System.out.println("3- Logout");
+                        System.out.println("Press 1 to Search a Book");
+                        System.out.println("Press 2 to Place a Book on hold");
+                        System.out.println("Press 3 to Logout");
                         System.out.println("--------------------------------------------------------");
                         
                         choice = takeInput(0,4);
@@ -280,19 +280,19 @@ public class Main
                         System.out.println("\tWelcome to Librarian's Portal");
                         System.out.println("--------------------------------------------------------");
                         System.out.println("Following Functionalities are available: \n");
-                        System.out.println("1- Search a Book");
-                       System.out.println("2- Place a Book on hold");
+                        System.out.println("Press 1 to Search a Book");
+                        System.out.println("Press 2 to  Place a Book on hold");
                       
                            
-                       System.out.println("3- Check Hold Requests Queue of a Book");                        
-                        System.out.println("4- Check out a Book");
-                        System.out.println("5- Check in a Book");                        
+                        System.out.println("Press 3 to  Check Hold Requests Queue of a Book");
+                        System.out.println("Press 4 to  Check out a Book");
+                        System.out.println("Press 5 to  Check in a Book");
                      
-                        System.out.println("6- Add a new Borrower");
+                        System.out.println("Press 6 to  Add a new Borrower");
                        
-                        System.out.println("7- Add new Book");
+                        System.out.println("Press 7 to  Add new Book");
                                      
-                        System.out.println("8- Logout");
+                        System.out.println("Press 8 to Logout");
                         System.out.println("--------------------------------------------------------");
                         
                         choice = takeInput(0,9);

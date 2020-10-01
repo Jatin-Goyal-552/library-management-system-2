@@ -123,8 +123,8 @@ public class Book {
     {
         HoldRequest hr = new HoldRequest(bor,this, new Date());
         
-        addHoldRequest(hr);        //Add this hold request to holdRequests queue of this book
-        bor.addHoldRequest(hr);      //Add this hold request to that particular borrower's class as well
+        addHoldRequest(hr);
+        bor.addHoldRequest(hr);
         
         System.out.println("\nThe book " + title + " has been successfully placed on hold by borrower " + bor.getName() + ".\n");
     }
@@ -234,13 +234,13 @@ public class Book {
 
                     else
                     {
-                        System.out.println("\nSorry some other users have requested for this book earlier than you. So you have to wait until their hold requests are processed.");
+                        System.out.println("\nSorry this book is already on hold. So you have to wait until their hold requests are processed.");
                         return;
                     }
                 }
                 else
                 {
-                    System.out.println("\nSome users have already placed this book on request and you haven't, so the book can't be issued to you.");
+                    System.out.println("\nSorry this book is already on hold, so the book can't be issued to you.");
                     
                     System.out.println("Would you like to place the book on hold? (y/n)");
 
