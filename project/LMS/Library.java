@@ -163,7 +163,7 @@ public class Library {
     public ArrayList<Book> searchForBooks() throws IOException
     {
         String choice;
-        String title = "", subject = "", author = "";
+        String title = "", author = "";
                 
         Scanner sc = new Scanner(System.in);  
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -217,7 +217,7 @@ public class Library {
             System.out.println("\nThese books are found: \n");
                         
             System.out.println("------------------------------------------------------------------------------");            
-            System.out.println("No.\t\tTitle\t\t\tAuthor\t\t\tSubject");
+            System.out.println("No.\t\tTitle\t\t\tAuthor");
             System.out.println("------------------------------------------------------------------------------");
             
             for (int i = 0; i < matchedBooks.size(); i++)

@@ -123,8 +123,8 @@ public class Book {
     {
         HoldRequest hr = new HoldRequest(bor,this, new Date());
         
-        addHoldRequest(hr);        //Add this hold request to holdRequests queue of this book
-        bor.addHoldRequest(hr);      //Add this hold request to that particular borrower's class as well
+        addHoldRequest(hr);        
+        bor.addHoldRequest(hr);      
         
         System.out.println("\nThe book " + title + " has been successfully placed on hold by borrower " + bor.getName() + ".\n");
     }
@@ -228,7 +228,7 @@ public class Book {
                 
                 if (hasRequest)
                 {
-                    //If this particular borrower has the earliest request for this book
+                    
                     if (holdRequests.get(0).getBorrower() == borrower)
                         serviceHoldRequest(holdRequests.get(0));       
 
